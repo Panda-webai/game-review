@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Cozy Game Journal — สร้างโพสต์รีวิวเกม</title>
+  <meta name="description" content="สมุดรีวิวเกมของคุณ ใส่ภาพ ให้ดาว เขียนความรู้สึก แล้วดาวน์โหลดโพสต์แนวตั้งความละเอียดสูง">
+  <meta name="theme-color" content="#56664e"><link rel="icon" href="favicon.svg"><link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.webmanifest" crossorigin="use-credentials">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png">
+  <meta name="application-name" content="Cozy Journal">
+  <meta name="apple-mobile-web-app-title" content="Cozy Journal">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+</head>
+<body data-mobile-view="editor">
+  <header class="topbar"><a class="brand" href="./"><span class="brand-mark">c.</span><span>cozy game journal<small>YOUR LITTLE REVIEW STUDIO</small></span></a><span class="header-note">a little play, a little story.</span><button class="primary top-export" id="topExport">ดาวน์โหลดภาพ <span aria-hidden="true">↗</span></button></header>
+  <nav class="mobile-tabs" aria-label="สลับหน้าทำโพสต์"><button type="button" data-view="editor" aria-pressed="true">เขียนรีวิว</button><button type="button" data-view="preview" aria-pressed="false">ดูตัวอย่างโพสต์</button></nav>
+  <main>
+    <section class="editor" aria-label="แต่งโพสต์รีวิวเกม">
+      <div class="editor-intro"><div class="eyebrow">MAKE IT YOURS</div><h1>บันทึกเกมโปรด<br><em>ในแบบของคุณ.</em></h1><p>ใส่ภาพ เล่าเรื่อง แล้วเก็บเป็นโพสต์น่ารัก ๆ</p></div>
+      <section class="form-section"><h2><span>01</span> เรื่องราวของเกม</h2>
+        <label for="title">ชื่อเกม</label><input id="title" data-field="title" maxlength="70" placeholder="เกมที่อยากเล่าให้ฟัง…" value="A little cozy adventure">
+        <div class="two-col"><div><label for="platform">แพลตฟอร์ม</label><div class="platform-select"><img id="platformIcon" src="assets/steam.svg" alt=""><select id="platform" data-field="platform"><option value="steam">Steam</option><option value="playstation">PlayStation</option><option value="nintendo">Nintendo</option></select></div></div><div><label for="date">วันที่รีวิว</label><input id="date" type="date" data-field="date"></div></div>
+        <div class="two-col"><div><label for="hours">ชั่วโมงที่เล่น</label><input inputmode="decimal" id="hours" data-field="hours" type="number" min="0" max="99999" step="0.5" placeholder="เช่น 24"></div><div><label for="status">สถานะ</label><select id="status" data-field="status"><option>กำลังเล่น</option><option>เล่นจบแล้ว</option><option>เล่นได้เรื่อย ๆ</option><option>พักไว้ก่อน</option></select></div></div>
+      </section>
+      <section class="form-section"><h2><span>02</span> ภาพความทรงจำ</h2>
+        <button id="uploadBtn" class="dropzone" type="button"><span class="upload-symbol" aria-hidden="true">＋</span><strong>เลือกภาพเกมของคุณ</strong><span class="desktop-upload-hint">ลากภาพมาวาง หรือกด Ctrl / ⌘ + V</span><span class="touch-upload-hint">แตะเพื่อเลือกรูปจากเครื่อง</span><small>JPG, PNG, WebP · ไม่เกิน 20 MB</small></button><input id="file" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+        <div class="image-tools" id="imageTools" hidden><div class="row"><span id="fileName">ภาพของคุณ</span><button id="removeImage" class="text-button" type="button">ลบภาพ</button></div><label for="fit">การจัดภาพ</label><select id="fit"><option value="cover">เต็มกรอบ (ครอบภาพ)</option><option value="contain">แสดงภาพทั้งหมด</option></select><div id="cropControls"><label for="zoom">ซูมภาพ</label><input type="range" id="zoom" min="1" max="2.5" step="0.01" value="1"><div class="two-col"><div><label for="panX">เลื่อนซ้าย–ขวา</label><input type="range" id="panX" min="0" max="1" step="0.01" value="0.5"></div><div><label for="panY">เลื่อนขึ้น–ลง</label><input type="range" id="panY" min="0" max="1" step="0.01" value="0.5"></div></div></div></div>
+      </section>
+      <section class="form-section"><h2><span>03</span> ความรู้สึกหลังเล่น</h2>
+        <div class="row"><label id="ratingLabel">ให้เกมนี้กี่ดาว?</label><span id="ratingValue">4 / 5</span></div><div class="stars" role="group" aria-labelledby="ratingLabel"><button data-rating="1" aria-label="1 ดาว">★</button><button data-rating="2" aria-label="2 ดาว">★</button><button data-rating="3" aria-label="3 ดาว">★</button><button data-rating="4" aria-label="4 ดาว">★</button><button data-rating="5" aria-label="5 ดาว">★</button><button id="clearRating" class="text-button" type="button">ล้าง</button></div>
+        <label for="review">รีวิวสั้น ๆ <small id="reviewCount">0 / 360</small></label><textarea id="review" data-field="review" rows="4" maxlength="360" placeholder="โลกของเกมนี้เป็นยังไง เล่นแล้วรู้สึกแบบไหน…"></textarea>
+        <label for="favorite">สิ่งที่ชอบที่สุด</label><textarea id="favorite" data-field="favorite" rows="2" maxlength="100" placeholder="ภาพสวย เพลงเพราะ หรือเรื่องราวที่ประทับใจ…"></textarea>
+        <label for="verdict">เหมาะกับใคร / ข้อสังเกต</label><textarea id="verdict" data-field="verdict" rows="2" maxlength="100" placeholder="อยากชวนใครมาเล่นเกมนี้…"></textarea>
+        <label for="author">ชื่อหรือช่องของคุณ</label><input id="author" data-field="author" maxlength="40" placeholder="@yourname"><p id="textWarning" role="status" class="text-warning" hidden></p>
+      </section>
+      <section class="form-section export-section"><h2><span>04</span> พร้อมเล่าให้โลกฟัง</h2><div class="two-col"><div><label for="quality">ความละเอียด</label><select id="quality"><option value="2">สูง · 2160 × 3840</option><option value="1">มาตรฐาน · 1080 × 1920</option><option value="3">สูงสุด · 3240 × 5760</option></select></div><div><label for="format">ชนิดไฟล์</label><select id="format"><option value="png">PNG</option><option value="jpeg">JPG</option></select></div></div><button class="primary download" id="exportBtn">ดาวน์โหลดโพสต์ <span aria-hidden="true">↓</span></button><p class="privacy">ภาพและข้อความประมวลผลในอุปกรณ์ของคุณ<br>กรุณาดาวน์โหลดก่อนปิดหรือรีเฟรชหน้า</p></section>
+    </section>
+    <section class="preview-area" aria-label="ตัวอย่างโพสต์"><div class="preview-sticky"><div class="preview-toolbar"><span><i aria-hidden="true"></i> ตัวอย่างโพสต์</span><span class="ratio-badge">9:16 <span>·</span> TIKTOK</span></div><div class="poster-shell" id="posterShell"><div class="tape tape-left" aria-hidden="true"></div><div class="tape tape-right" aria-hidden="true"></div><canvas id="poster" width="1080" height="1920" aria-label="ตัวอย่างโพสต์รีวิวเกมแนวตั้ง"></canvas><div class="hotspots" id="hotspots"><button class="hotspot title-spot" data-edit="title" aria-label="แก้ไขชื่อเกม"><span>แก้ไขชื่อเกม</span></button><button class="hotspot image-spot" id="posterUpload" aria-label="ใส่หรือเปลี่ยนภาพ"><span>＋ ใส่ / เปลี่ยนภาพ</span></button><button class="hotspot review-spot" data-edit="review" aria-label="แก้ไขรีวิว"><span>เขียนรีวิว</span></button><button class="hotspot favorite-spot" data-edit="favorite" aria-label="แก้ไขสิ่งที่ชอบ"><span>สิ่งที่ชอบ</span></button><button class="hotspot verdict-spot" data-edit="verdict" aria-label="แก้ไขข้อสังเกต"><span>เหมาะกับใคร</span></button></div></div><p class="preview-hint">แตะหรือคลิกช่องบนโพสต์เพื่อพิมพ์ข้อความ <span aria-hidden="true">✎</span></p></div></section>
+  </main>
+  <footer class="site-footer">made for slow days & good games <span>COZY GAME JOURNAL</span></footer>
+  <dialog id="editDialog"><form id="editForm"><div class="row"><h2 id="dialogTitle">แก้ไขข้อความ</h2><button type="button" id="closeDialog" class="close" aria-label="ปิด">×</button></div><label id="dialogLabel" for="dialogText">ข้อความบนโพสต์</label><textarea id="dialogText" rows="5"></textarea><p class="dialog-count" id="dialogCount"></p><button type="submit" class="primary">ใส่ลงในโพสต์</button></form></dialog>
+  <div class="mobile-actions"><button type="button" id="mobileSwitch" class="secondary">ดูตัวอย่าง</button><button type="button" id="mobileExport" class="primary">บันทึกภาพ ↓</button></div>
+  <dialog id="saveDialog" aria-labelledby="saveTitle"><div class="row"><h2 id="saveTitle">ภาพพร้อมแล้ว</h2><button type="button" id="closeSave" class="close" aria-label="ปิดหน้าบันทึกภาพ">×</button></div><p id="saveDetails" class="save-details"></p><img id="exportPreview" alt="ภาพโพสต์ที่พร้อมบันทึก"><p id="saveHelp" class="save-help">แตะค้างบนภาพเพื่อดูตัวเลือกบันทึก หรือกดดาวน์โหลดไฟล์</p><div class="save-buttons"><button type="button" id="shareImage" class="primary" hidden>บันทึก / แชร์ภาพ</button><a id="downloadLink" class="secondary" download>ดาวน์โหลดไฟล์ภาพ</a></div><p id="saveError" role="status" class="save-help"></p></dialog>
+  <div id="toast" role="status" aria-live="polite"></div><script src="app.js"></script>
+</body></html>
